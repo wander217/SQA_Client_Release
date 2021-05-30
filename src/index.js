@@ -1,13 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './app/App';
 import reportWebVitals from './reportWebVitals';
+import SqaStore from "./app/SqaProvider";
+import {Provider} from "react-redux"; 
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import {viVN} from "@material-ui/core/locale";
+
+const sqaTheme= createMuiTheme({
+  palette:{
+    background:{
+        default:"#F5F7FF"
+    }
+  }
+},viVN);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <ThemeProvider theme={sqaTheme}>
+       <Provider store={SqaStore}>
+          <App />
+        </Provider>
+    </ThemeProvider>,
   document.getElementById('root')
 );
 
