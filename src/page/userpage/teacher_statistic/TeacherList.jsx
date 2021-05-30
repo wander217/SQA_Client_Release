@@ -47,7 +47,7 @@ const validateData=[
         name:"fullname",
         testFunction:item=>(/^[\p{L}\d\s]*$/u).test(item),
         errorMessage: "Tên giảng viên chỉ được bao gồm chữ,số,khoảng trắng"
-    },
+    }
 ]
 
 export default function TeacherList(){
