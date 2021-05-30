@@ -100,9 +100,8 @@ export default function GroupTable(){
     const handlePage=(pageNumber,recordPerPage,title,sortOrder)=>{
         if(state.subjectId===0||state.teacherId===0) return;
         setPageNumber(pageNumber);
-        const tmp = isSearch?dataInput.input:"";
         GroupApi.getBySubject(state.subjectId,pageNumber,recordPerPage,title
-            ,sortOrder,dataInput.type,tmp)
+            ,sortOrder,dataSearch.type,dataSearch.input)
         .then(resp=>{
             setRecord(resp);
             if(resp.length!==0){
@@ -134,14 +133,23 @@ export default function GroupTable(){
     const [notify,setNotify] = useState({ open:false, message:"", type:""});
     //mở chế độ chờ
     const [openBackDrop,setOpenBackDrop] = useState(false);
-    //kiểm tra có phải search ko
-     const [isSearch,setSearch] = useState(false);
-   //Xử lý tìm kiếm
-   const handleSearch = ()=>{
-        setSearch(true);
-        handlePage(0,5,headerCells[0].name,sortOrder);
-        setPageNumber(0); 
+    //Dữ liệu search
+    const [dataSearch, setDataSearch] = useState({
+        input:"",
+        type:0
+    });
+    //Xử lý tìm kiếm
+    const handleSearch = ()=>{
+        setDataSearch({
+            ...dataSearch,
+            ...dataInput
+        });
     };
+
+    useEffect(()=>{
+        handlePage(0,5,headerCells[0].name,sortOrder);
+        setPageNumber(0);
+    },[dataSearch.type,dataSearch.input])
     //Xử lý khi nhập
     const handleInputChange=e=>{
         const {name,value} = e.target;

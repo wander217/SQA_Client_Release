@@ -96,14 +96,11 @@ export default function SubjectTeacherStatistic(){
     });
     //Tổng số phần tử
     const [total,setTotal] = useState(0);
-    //kiểm tra có phải search ko
-    const [isSearch,setSearch] = useState(false);
     //Xử lý chuyển trang
     const handlePage=(pageNumber,recordPerPage,title,sortOrder)=>{
         setPageNumber(pageNumber);
-        const tmp = isSearch?dataInput.input:"";
         TeacherApi.getAllAssigned(id,type,pageNumber,recordPerPage,title
-                        ,sortOrder,dataInput.type,tmp)
+                        ,sortOrder,dataSearch.type,dataSearch.input)
         .then(resp=>{
             setRecord(resp);
             if(resp.length!==0){
@@ -121,12 +118,22 @@ export default function SubjectTeacherStatistic(){
         setPageNumber,sortOrder
     }= useTable(headerCells,handlePage,total);
 
+    //Dữ liệu search
+    const [dataSearch, setDataSearch] = useState({
+        input:"",
+        type:0
+    });
     //Xử lý tìm kiếm
     const handleSearch = ()=>{
-        setSearch(true);
+        setDataSearch({
+            ...dataSearch,
+            ...dataInput
+        });
+    };
+    useEffect(()=>{
         handlePage(0,5,headerCells[0].name,sortOrder);
         setPageNumber(0);
-    };
+    },[dataSearch.type,dataSearch.input])
     //Xử lý khi nhập
     const handleInputChange=e=>{
         const {name,value} = e.target;

@@ -43,13 +43,7 @@ const initialData={
     name:"",
 }
 
-const validateData=[
-    {
-        name:"name",
-        testFunction:item=>(/^[\p{L}\d\s]*$/u).test(item),
-        errorMessage: "Tên môn học chỉ được bao gồm chữ,số hoặc khoảng trắng"
-    },
-]
+const validateData=[];
 
 //Dữ liệu bảng
 const getId= data=>{

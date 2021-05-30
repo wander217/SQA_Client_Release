@@ -86,15 +86,12 @@ export default function HistoryTable(){
         input:"",
         type:0
     });
-    //kiểm tra có phải search ko
-    const [isSearch,setSearch] = useState(false);
     //Xử lý chuyển trang
     const handlePage=(pageNumber,recordPerPage,title,sortOrder)=>{
         if(state.id===0)return;
         setPageNumber(pageNumber);
-        const tmp = isSearch?dataInput.input:"";
         HistoryApi.getByTeacher(state.id,pageNumber,recordPerPage,title
-            ,sortOrder,dataInput.type,tmp)
+            ,sortOrder,dataSearch.type,dataSearch.input)
         .then(resp=>{
             setRecord(resp);
             if(resp.length!==0){
@@ -126,13 +123,28 @@ export default function HistoryTable(){
            [name]:value
         });
     }
-    
+    //Dữ liệu search
+    const [dataSearch, setDataSearch] = useState({
+        input:"",
+        type:0
+    });
     //Xử lý tìm kiếm
     const handleSearch = ()=>{
-        setSearch(true);
+        setDataSearch({
+            ...dataSearch,
+            ...dataInput
+        });
+    };
+
+    useEffect(()=>{
         handlePage(0,5,headerCells[0].name,sortOrder);
         setPageNumber(0);
-    };
+    },[dataSearch.type,dataSearch.input])
+
+    useEffect(()=>{
+        handlePage(0,5,headerCells[0].name,sortOrder);
+        setPageNumber(0);
+    },[dataSearch.type,dataSearch.input])
 
     //CSS
     const classes = useStyles();
