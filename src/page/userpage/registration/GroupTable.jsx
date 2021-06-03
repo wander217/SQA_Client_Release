@@ -62,7 +62,7 @@ const headerCells=[
     {title:"Kíp học",disableSorting:false,name:"shift"},
     {title:"Tuần học",disableSorting:true,name:"learningWeek"},
     {title:"Phòng học",disableSorting:true,name:"room"},
-    {title:"Còn lại",disableSorting:false,name:"numberOfTeacher"},
+    {title:"Còn lại",disableSorting:true,name:"numberOfTeacher"},
     {title:"Hành động",disableSorting:true}
 ]
 

@@ -166,6 +166,7 @@ export default function Login() {
                         type="submit" fullWidth
                         variant="contained" color="primary"
                         className={classes.submit}
+                        id={"login-button"}
                     >
                         Xác nhận
                     </Button>
