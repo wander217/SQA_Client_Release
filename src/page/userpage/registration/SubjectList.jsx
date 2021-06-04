@@ -21,7 +21,8 @@ const useStyle = makeStyles(theme=>({
         paddingTop:theme.spacing(0)
     },
     header:{
-        background:"white"
+        background:"white",
+        color:theme.palette.text.primary
     },
     accordion:{
         width:"100%"

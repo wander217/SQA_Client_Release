@@ -26,7 +26,7 @@ const useStyles=makeStyles((theme)=>({
     },
     title:{
         marginTop:theme.spacing(1),
-        color:theme.palette.text.secondary,
+        color:theme.palette.text.primary,
         paddingBottom:theme.spacing(1)
     },
     search:{

@@ -88,6 +88,7 @@ export default function Login() {
         if(validate()){
             setOpenBackDrop(true);
             ForgotApi.doForgot(data).then(resp=>{
+                console.log(resp.data);
                 openMessage({
                     message:resp.data,
                     type:"success"
